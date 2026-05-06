@@ -1,0 +1,19 @@
+{
+  "name": "assessment-skills",
+  "description": "Crisp Assessment AI Process skills — tools for building and managing the Crisp AI-enhanced category management assessment reference site.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Cheryl Overholser",
+    "email": "cheryl.overholser@gocrisp.com"
+  },
+  "homepage": "https://github.com/cheryloverholser-bot/Assessmentskills",
+  "repository": "https://github.com/cheryloverholser-bot/Assessmentskills",
+  "license": "MIT",
+  "keywords": [
+    "crisp",
+    "assessment",
+    "category-management",
+    "cpg",
+    "ai-prompts"
+  ]
+}
