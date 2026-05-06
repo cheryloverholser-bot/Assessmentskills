@@ -11,58 +11,48 @@ description: >
 
 # Crisp Prompt Library Builder
 
-You are adding a new AI prompt entry to the **Crisp Assessment AI Process Plan** — a single
-self-contained HTML file at:
+You are adding a new AI prompt entry to the **Crisp Assessment AI Process Plan** HTML site.
 
-```
-C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html
-```
+## Step 0 — Find the HTML file
 
-## Your job
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
 
-1. Gather the prompt details from the user (or infer what you can)
-2. Read the HTML file to find the current highest prompt ID and the correct insertion point
-3. Generate the new prompt's HTML block
-4. Insert it into the file in the right phase section
-5. Confirm what was added
+If none found, ask the user where the file is before proceeding.
 
 ---
 
 ## Step 1 — Collect prompt details
 
-You need these five things. Ask for any that are missing, but make reasonable inferences
-where you can (e.g. if the user pastes a prompt and says "add this to phase 3", you can
-draft the title and input description from the prompt text itself):
+Ask for any that are missing. Infer what you can from context (e.g. if user pastes a prompt
+and says "add this to phase 3", draft the title and input description from the prompt text):
 
 | Field | Description | Required |
 |---|---|---|
 | **title** | Short display name (e.g. "Workshop Gap Flagging") | Yes |
-| **phase** | Which phase: 1 (Intake), 2 (Discovery), 3 (Analysis), or 4 (Roadmap & Readout) | Yes |
+| **phase** | 1 (Intake), 2 (Discovery), 3 (Analysis), or 4 (Roadmap & Readout) | Yes |
 | **type** | `NOW` (existing workflow) or `NEW` (newly designed) | Yes |
-| **input_description** | Plain-English description of what the user pastes into Claude before running this prompt | Yes |
+| **input_description** | What the user pastes into Claude before running this prompt | Yes |
 | **prompt_text** | The actual Claude prompt text, verbatim | Yes |
-| **note** | Optional tip, edge case, or quality check for the user | No |
+| **note** | Optional tip or quality check | No |
 
 ---
 
-## Step 2 — Read the HTML file and determine IDs
+## Step 2 — Read the file and determine IDs
 
-Read the HTML file. Find all existing prompt card IDs (they look like `id="pc1"`, `id="pc2"`, etc.)
-and prompt text IDs (`id="pt1"`, `id="pt2"`, etc.). The next prompt gets the next sequential
-integer — if the highest existing ID is `pc10`, the new one is `pc11` / `pt11`.
+Find all existing `id="pc{N}"` and `id="pt{N}"` values. The new prompt gets the next
+sequential integer (highest existing + 1).
 
-Also locate the correct insertion point. The file has one `.prompt-phase-title` block per phase
-in the `id="page-prompts"` section. Find the last `.prompt-card` block within the target phase's
-group — insert the new card immediately after it.
+Find the insertion point: last `.prompt-card` in the target phase group, inside `id="page-prompts"`.
 
-**Important:** If the `id="page-prompts"` section doesn't exist yet (the library hasn't been
-built), tell the user and offer to scaffold the full prompt library section first.
+If `id="page-prompts"` doesn't exist yet, tell the user the library section hasn't been built
+and offer to scaffold it first.
 
 ---
 
 ## Step 3 — Generate the HTML block
-
-Use this exact template. Replace all {placeholders}:
 
 ```html
 <div class="prompt-card" id="pc{N}">
@@ -87,77 +77,37 @@ Use this exact template. Replace all {placeholders}:
 </div>
 ```
 
-Where:
-- `{N}` = the next sequential integer
-- `{badge_class}` = `badge-current` when type is NOW, or `badge-new` when type is NEW
-- `{note_block}` = empty string if no note, or:
-  ```html
-  
-    <div class="prompt-note">{note}</div>
-  ```
-
-Escape any HTML special characters in prompt_text and input_description:
-- `&` → `&amp;`
-- `<` → `&lt;`
-- `>` → `&gt;`
-
-The prompt_text block uses `white-space: pre-wrap` styling — preserve line breaks exactly as
-the user provides them. Do not collapse or reformat the prompt text.
+- `{badge_class}` = `badge-current` for NOW, `badge-new` for NEW
+- `{note_block}` = `<div class="prompt-note">{note}</div>` if note provided, else empty
+- Escape `&` → `&amp;`, `<` → `&lt;`, `>` → `&gt;` in prompt_text and input_description
+- Preserve all line breaks in prompt_text exactly (the element uses `white-space: pre-wrap`)
 
 ---
 
-## Step 4 — Insert into the file
+## Step 4 — Insert and verify
 
-Use the Edit tool to insert the new HTML block. The insertion point is immediately after the
-closing `</div>` of the last `.prompt-card` in the target phase group, and before either the
-next `.prompt-phase-title` or the closing `</div>` of the page section.
+Insert immediately after the closing `</div>` of the last `.prompt-card` in the target phase,
+before the next `.prompt-phase-title` or the section's closing tag.
 
-After editing, do a quick sanity check: search the file for the new `id="pc{N}"` to confirm
-it was inserted correctly.
+Verify insertion: confirm `id="pc{N}"` appears in the file after editing.
 
 ---
 
 ## Step 5 — Confirm
 
-Tell the user:
-- The prompt title and ID assigned (e.g. "Added 'Workshop Gap Flagging' as pc11/pt11")
-- Which phase section it was added to
-- That the copy button is wired to `copyPrompt('pt{N}', this)` and will work immediately
+Report: title, ID assigned (e.g. pc11/pt11), phase inserted into, copy button target.
 
 ---
 
-## CSS reference (already in the file — do not duplicate)
+## Reference: CSS and JS already in file (do not duplicate)
 
 ```
-.prompt-card, .prompt-header, .prompt-header:hover
-.prompt-title, .prompt-meta, .prompt-chevron
-.prompt-card.open .prompt-chevron  (rotate 180°)
-.prompt-body, .prompt-card.open .prompt-body  (display: block)
-.prompt-section, .prompt-section-label
-.prompt-text  (green-tinted code block, pre-wrap)
-.copy-btn, .copy-btn:hover, .copy-btn.copied
-.prompt-note  (amber left-border tip box)
-.ai-step-badge, .badge-current, .badge-new
+.prompt-card  .prompt-header  .prompt-title  .prompt-meta  .prompt-chevron
+.prompt-body  .prompt-section  .prompt-section-label  .prompt-text
+.copy-btn  .copy-btn.copied  .prompt-note
+.ai-step-badge  .badge-current  .badge-new
 ```
+Functions: `togglePrompt(id)`, `copyPrompt(id, btn)`
 
-JavaScript functions `togglePrompt(id)` and `copyPrompt(id, btn)` are already defined.
-
----
-
-## Edge cases
-
-- **Prompt library section missing:** If `id="page-prompts"` doesn't exist in the HTML, stop
-  and tell the user. Offer to scaffold it before adding the prompt.
-
-- **Phase section missing within the library:** If the target phase's `.prompt-phase-title`
-  doesn't exist yet inside `page-prompts`, add it before the new card:
-  ```html
-  <div class="prompt-phase-title">Phase {phase} — {phase_name}</div>
-  ```
-  Phase names: 1 = Intake, 2 = Discovery, 3 = Analysis & Opportunity Log, 4 = Roadmap & Readout
-
-- **User provides a prompt idea, not final text:** Draft the prompt using the established
-  style (structured numbered steps, ends with a [PASTE X HERE] placeholder). Show the draft
-  and ask for approval before inserting.
-
-- **Duplicate title:** If a prompt with the same title already exists, flag it and confirm before adding.
+Phase section titles: Phase 1 = Intake · Phase 2 = Discovery ·
+Phase 3 = Analysis & Opportunity Log · Phase 4 = Roadmap & Readout

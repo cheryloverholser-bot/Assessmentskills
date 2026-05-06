@@ -9,6 +9,17 @@ description: >
 
 # Crisp Engagement Generator
 
+## Step 0 — Find the HTML file
+
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+
+If not found, ask the user.
+
+---
+
 ## TODO: Implement this skill
 
 **What it should do:**
@@ -19,9 +30,9 @@ description: >
 5. Create subfolders: `Templates/`, `Deliverables/`, `Notes/`
 6. Summarize what was created and how to open it
 
-**Source file:** `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
-**Templates source:** `C:\Users\COverholser\Documents\Cantactix\Templates\Assessments Templates\`
-**Default engagement root:** `C:\Users\COverholser\Documents\Cantactix\`
+**Source file:** `Crisp-Assessment-AI-Process-Plan.html (search cwd first, fall back to known path)`
+**Templates source:** `[assessment templates directory]Assessments Templates\`
+**Default engagement root:** `[engagements root directory]`
 
 **Folder structure to create:**
 ```

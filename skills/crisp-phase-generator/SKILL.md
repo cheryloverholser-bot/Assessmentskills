@@ -9,6 +9,17 @@ description: >
 
 # Crisp Phase Generator
 
+## Step 0 — Find the HTML file
+
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+
+If not found, ask the user.
+
+---
+
 ## TODO: Implement this skill
 
 **What it should do:**
@@ -16,7 +27,7 @@ description: >
 2. Generate the full phase page HTML using the standard 3-column + 2-column + gate layout
 3. Insert or replace the `id="page-phase{N}"` section in the HTML file
 
-**Target file:** `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+**Target file:** `Crisp-Assessment-AI-Process-Plan.html (search cwd first, fall back to known path)`
 
 **Phase page structure (must follow this exactly):**
 ```

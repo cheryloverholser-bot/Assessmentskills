@@ -9,6 +9,17 @@ description: >
 
 # Crisp Template Manager
 
+## Step 0 — Find the HTML file
+
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+
+If not found, ask the user.
+
+---
+
 ## TODO: Implement this skill
 
 **What it should do:**
@@ -17,8 +28,8 @@ description: >
 3. Validate that referenced template files exist in the templates directory
 4. Update file names if templates have been renamed
 
-**Target file:** `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
-**Templates directory:** `C:\Users\COverholser\Documents\Cantactix\Templates\Assessments Templates\`
+**Target file:** `Crisp-Assessment-AI-Process-Plan.html (search cwd first, fall back to known path)`
+**Templates directory:** `[assessment templates directory]Assessments Templates\`
 
 **Template link structure:**
 ```html

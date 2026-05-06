@@ -9,6 +9,17 @@ description: >
 
 # Crisp Engagement Setup
 
+## Step 0 — Find the HTML file
+
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+
+If not found, ask the user.
+
+---
+
 ## TODO: Implement this skill
 
 **What it should do:**
@@ -19,7 +30,7 @@ description: >
 4. Optionally generate a localStorage JSON snippet the user can paste into browser console
    to skip the setup modal entirely on first open
 
-**Target file:** `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+**Target file:** `Crisp-Assessment-AI-Process-Plan.html (search cwd first, fall back to known path)`
 
 **Key JS object to populate:**
 ```javascript

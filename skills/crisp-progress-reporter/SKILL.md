@@ -9,18 +9,29 @@ description: >
 
 # Crisp Progress Reporter
 
+## Step 0 — Find the HTML file
+
+Search for the file in this order:
+1. Current working directory: `Crisp-Assessment-AI-Process-Plan.html`
+2. Recursively in cwd: any file matching `*Assessment*Process*.html`
+3. Known default: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+
+If not found, ask the user.
+
+---
+
 ## TODO: Implement this skill
 
 **What it should do:**
 1. Read the implementation plan at:
-   `C:\Users\COverholser\Documents\Cantactix\Templates\docs\superpowers\plans\2026-05-06-assessment-process-plan.md`
+   `[assessment templates directory]docs\superpowers\plans\2026-05-06-assessment-process-plan.md`
 2. Parse the checkbox tasks (`- [ ]` = todo, `- [x]` = done)
 3. Read the HTML file and verify which sections actually exist (not just checked off)
 4. Produce a clear status report: what's complete, what's in progress, what's missing
 
 **Target files:**
-- Plan: `C:\Users\COverholser\Documents\Cantactix\Templates\docs\superpowers\plans\2026-05-06-assessment-process-plan.md`
-- HTML: `C:\Users\COverholser\Documents\Cantactix\Templates\Crisp-Assessment-AI-Process-Plan.html`
+- Plan: `[assessment templates directory]docs\superpowers\plans\2026-05-06-assessment-process-plan.md`
+- HTML: `Crisp-Assessment-AI-Process-Plan.html (search cwd first, fall back to known path)`
 
 **Tasks from implementation plan (9 total):**
 1. HTML shell + brand CSS + topbar ✅ (exists in HTML)
